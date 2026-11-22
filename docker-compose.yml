@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  docusense-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      - PORT=8001
+    restart: always
+
+  docusense-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3005:80"
+    depends_on:
+      - docusense-backend
+    restart: always
